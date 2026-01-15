@@ -11,6 +11,7 @@ function App(): React.ReactElement {
   const [todos, setTodos] = useState<Todo[]>([]);
 
   const createTask = (value: string) => {
+    if (value.length === 0) return;
     const newTask: Todo = {
       id: todos.length,
       title: value,

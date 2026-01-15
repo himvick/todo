@@ -1,6 +1,7 @@
 import React from "react";
 import "./styles.css";
 import Todo from "../model";
+import SingleTask from "./SingleTask";
 
 interface ActiveTaskListProps {
   todos: Todo[];
@@ -13,7 +14,10 @@ const ActiveTaskList: React.FC<ActiveTaskListProps> = ({ todos }) => {
         <h3>Active Tasks</h3>
       </div>
       <div className="Active_list">
-        {todos && todos.map((todo) => <div></div>)}
+        {todos &&
+          todos.map((todo) => (
+            <SingleTask key={todo.id} todos={todos} todo={todo} />
+          ))}
       </div>
     </div>
   );
