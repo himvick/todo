@@ -5,9 +5,13 @@ import SingleTask from "./SingleTask";
 
 interface ActiveTaskListProps {
   todos: Todo[];
+  setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
 
-const ActiveTaskList: React.FC<ActiveTaskListProps> = ({ todos }) => {
+const ActiveTaskList: React.FC<ActiveTaskListProps> = ({ todos, setTodos }) => {
+  const deleteTask = (id: number, todos: Todo[]) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
+  };
   return (
     <div className="Active_container">
       <div className="Active_heading">
@@ -16,7 +20,13 @@ const ActiveTaskList: React.FC<ActiveTaskListProps> = ({ todos }) => {
       <div className="Active_list">
         {todos &&
           todos.map((todo) => (
-            <SingleTask key={todo.id} todos={todos} todo={todo} />
+            <SingleTask
+              key={todo.id}
+              todos={todos}
+              todo={todo}
+              deleteTask={deleteTask}
+              setTodos={setTodos}
+            />
           ))}
       </div>
     </div>

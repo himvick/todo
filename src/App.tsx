@@ -10,7 +10,10 @@ function App(): React.ReactElement {
   const [input, setInput] = useState<string>("");
   const [todos, setTodos] = useState<Todo[]>([]);
 
-  const createTask = (value: string) => {
+  const createTask = (
+    value: string,
+    setInput: React.Dispatch<React.SetStateAction<string>>
+  ) => {
     if (value.length === 0) return;
     const newTask: Todo = {
       id: todos.length,
@@ -18,13 +21,14 @@ function App(): React.ReactElement {
       completed: false,
     };
     setTodos([...todos, newTask]);
+    setInput("");
   };
   return (
     <div className="App">
       <h1>Todo List</h1>
       <AddTask input={input} setInput={setInput} createTask={createTask} />
       <div className="Tasklists_container">
-        <ActiveTaskList todos={todos} />
+        <ActiveTaskList todos={todos} setTodos={setTodos} />
         <CompletedTaskList />
       </div>
     </div>

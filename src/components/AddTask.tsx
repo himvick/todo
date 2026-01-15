@@ -17,7 +17,10 @@ const AddTask: React.FC<Props> = ({ input, setInput, createTask }) => {
         type="text"
         placeholder="Add tasks..."
       />
-      <button onClick={() => createTask(input)} className="Add_button">
+      <button
+        onClick={() => createTask(input, setInput)}
+        className="Add_button"
+      >
         Add
       </button>
     </div>
