@@ -9,6 +9,7 @@ import Todo from "./model";
 function App(): React.ReactElement {
   const [input, setInput] = useState<string>("");
   const [todos, setTodos] = useState<Todo[]>([]);
+  const [completedTasks, setCompletedTasks] = useState<Todo[]>([]);
 
   const createTask = (
     value: string,
@@ -29,7 +30,7 @@ function App(): React.ReactElement {
       <AddTask input={input} setInput={setInput} createTask={createTask} />
       <div className="Tasklists_container">
         <ActiveTaskList todos={todos} setTodos={setTodos} />
-        <CompletedTaskList />
+        <CompletedTaskList tasks={completedTasks} />
       </div>
     </div>
   );
