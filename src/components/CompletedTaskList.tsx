@@ -14,7 +14,9 @@ const CompletedTaskList: React.FC<Props> = ({ tasks }) => {
         <h3>Completed Tasks</h3>
       </div>
       <div className="Completed_list">
-        {/* Completed tasks will be rendered here */}
+        {tasks.map((task) => (
+          <CompletedTask key={task.id} task={task} />
+        ))}
       </div>
     </div>
   );

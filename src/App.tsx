@@ -24,12 +24,21 @@ function App(): React.ReactElement {
     setTodos([...todos, newTask]);
     setInput("");
   };
+
+  const completeTask = (id: number) => {
+    const taskToComplete = todos.find((todo) => todo.id === id);
+    if (taskToComplete) {
+      taskToComplete.completed = true;
+      setTodos(todos.filter((todo) => todo.id !== id));
+      setCompletedTasks([...completedTasks, taskToComplete]);
+    }
+  }
   return (
     <div className="App">
       <h1>Todo List</h1>
       <AddTask input={input} setInput={setInput} createTask={createTask} />
       <div className="Tasklists_container">
-        <ActiveTaskList todos={todos} setTodos={setTodos} />
+        <ActiveTaskList todos={todos} setTodos={setTodos} completeTask={completeTask} />
         <CompletedTaskList tasks={completedTasks} />
       </div>
     </div>
