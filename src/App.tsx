@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AddTask from "./components/AddTask";
 import ActiveTaskList from "./components/ActiveTaskList";
 import CompletedTaskList from "./components/CompletedTaskList";
@@ -10,6 +10,18 @@ function App(): React.ReactElement {
   const [input, setInput] = useState<string>("");
   const [todos, setTodos] = useState<Todo[]>([]);
   const [completedTasks, setCompletedTasks] = useState<Todo[]>([]);
+
+  useEffect(() => {
+    const storedTodos: string | null = localStorage.getItem("todos");
+    const storedCompletedTasks: string | null =
+      localStorage.getItem("completedTasks");
+    if (storedTodos) {
+      setTodos(JSON.parse(storedTodos));
+    }
+    if (storedCompletedTasks) {
+      setCompletedTasks(JSON.parse(storedCompletedTasks));
+    }
+  });
 
   const createTask = (
     value: string,
@@ -22,6 +34,7 @@ function App(): React.ReactElement {
       completed: false,
     };
     setTodos([...todos, newTask]);
+    localStorage.setItem("todos", JSON.stringify([...todos, newTask]));
     setInput("");
   };
 
@@ -32,14 +45,34 @@ function App(): React.ReactElement {
       setTodos(todos.filter((todo) => todo.id !== id));
       setCompletedTasks([...completedTasks, taskToComplete]);
     }
-  }
+    localStorage.setItem(
+      "todos",
+      JSON.stringify(todos.filter((todo) => todo.id !== id))
+    );
+    localStorage.setItem(
+      "completedTasks",
+      JSON.stringify([...completedTasks, taskToComplete])
+    );
+  };
+
+  const deleteTask = (id: number) => {
+    setCompletedTasks(completedTasks.filter((task) => task.id !== id));
+    localStorage.setItem(
+      "completedTasks",
+      JSON.stringify(completedTasks.filter((task) => task.id !== id))
+    );
+  };
   return (
     <div className="App">
       <h1>Todo List</h1>
       <AddTask input={input} setInput={setInput} createTask={createTask} />
       <div className="Tasklists_container">
-        <ActiveTaskList todos={todos} setTodos={setTodos} completeTask={completeTask} />
-        <CompletedTaskList tasks={completedTasks} />
+        <ActiveTaskList
+          todos={todos}
+          setTodos={setTodos}
+          completeTask={completeTask}
+        />
+        <CompletedTaskList tasks={completedTasks} deleteTask={deleteTask} />
       </div>
     </div>
   );

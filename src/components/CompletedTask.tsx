@@ -4,13 +4,17 @@ import Todo from "../model";
 
 interface Props {
   task: Todo;
+  deleteTask: (id: number) => void;
 }
 
-const CompletedTask = ({ task }: Props) => {
+const CompletedTask = ({ task, deleteTask }: Props) => {
   return (
     <div className="SingleCompleted_container">
       <p className="SingleCompleted_text">{task.title}</p>
-      <button className="SingleCompleted_button">
+      <button
+        className="SingleCompleted_button"
+        onClick={() => deleteTask(task.id)}
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width={25}

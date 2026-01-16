@@ -5,9 +5,10 @@ import Todo from "../model";
 
 interface Props {
   tasks: Todo[];
+  deleteTask: (id: number) => void;
 }
 
-const CompletedTaskList: React.FC<Props> = ({ tasks }) => {
+const CompletedTaskList: React.FC<Props> = ({ tasks, deleteTask }) => {
   return (
     <div className="Completed_container">
       <div className="Completed_heading">
@@ -15,7 +16,7 @@ const CompletedTaskList: React.FC<Props> = ({ tasks }) => {
       </div>
       <div className="Completed_list">
         {tasks.map((task) => (
-          <CompletedTask key={task.id} task={task} />
+          <CompletedTask key={task.id} task={task} deleteTask={deleteTask} />
         ))}
       </div>
     </div>
