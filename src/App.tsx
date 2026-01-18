@@ -21,7 +21,7 @@ function App(): React.ReactElement {
     if (storedCompletedTasks) {
       setCompletedTasks(JSON.parse(storedCompletedTasks));
     }
-  });
+  }, []);
 
   const createTask = (
     value: string,
