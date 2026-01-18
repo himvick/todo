@@ -1,10 +1,10 @@
 import React from "react";
 import "./App.css";
 import { useState, useEffect } from "react";
-import AddTask from "./components/AddTask";
-import ActiveTaskList from "./components/ActiveTaskList";
-import CompletedTaskList from "./components/CompletedTaskList";
-import Todo from "./model";
+import AddTask from "./components/AddTask.tsx";
+import ActiveTaskList from "./components/ActiveTaskList.tsx";
+import CompletedTaskList from "./components/CompletedTaskList.tsx";
+import Todo from "./model.ts";
 
 function App(): React.ReactElement {
   const [input, setInput] = useState<string>("");

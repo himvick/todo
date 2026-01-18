@@ -1,6 +1,6 @@
 import React from "react";
 import "./styles.css";
-import CompletedTask from "./CompletedTask";
+import CompletedTask from "./CompletedTask.tsx";
 import Todo from "../model";
 
 interface Props {

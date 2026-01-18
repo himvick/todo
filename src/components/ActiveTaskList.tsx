@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles.css";
 import Todo from "../model";
-import SingleTask from "./SingleTask";
+import SingleTask from "./SingleTask.tsx";
 
 interface ActiveTaskListProps {
   todos: Todo[];
